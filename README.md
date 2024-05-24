@@ -24,4 +24,4 @@ Este proyecto es una prueba técnica que implementa una aplicación de administr
 1. Clonar el repositorio:
    ```bash
    git clone https://github.com/raziel214/PruebaGML.git
-   cd tu-repositorio/java-backend
+   cd PruebaGML
