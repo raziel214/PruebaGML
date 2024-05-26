@@ -1,0 +1,133 @@
+openapi: 3.0.0
+info:
+  version: "1.0.0"
+  title: Clientes API
+  description: API para la gestión de datos de clientes.
+servers:
+  # Added by API Auto Mocking Plugin
+  #- description: SwaggerHub API Auto Mocking
+  #  url: https://virtserver.swaggerhub.com/SOULREAVERS214/Clientes/1.0.0
+  - description: SwaggerHub API Auto Mocking
+    url: http://localhost:8080/api/v1
+paths:
+  /clientes:
+    get:
+      tags:
+        - Clientes
+      summary: Obtener una lista de todos los clientes
+      responses:
+        '200':
+          description: Una lista de clientes
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Cliente'
+    post:
+      tags:
+        - Clientes
+      summary: Crear un nuevo cliente
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Cliente'
+      responses:
+        '201':
+          description: Cliente creado
+  /clientes/search:
+    get:
+      tags:
+        - Clientes
+      summary: Buscar clientes por shared key
+      parameters:
+        - name: sharedKey
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Cliente encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cliente'
+  /clientes/{clienteId}:
+    get:
+      tags:
+        - Clientes
+      summary: Obtener un cliente por ID
+      parameters:
+        - name: clienteId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Cliente encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cliente'
+    put:
+      tags:
+        - Clientes
+      summary: Actualizar un cliente
+      parameters:
+        - name: clienteId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Cliente'
+      responses:
+        '200':
+          description: Cliente actualizado
+    delete:
+      tags:
+        - Clientes
+      summary: Eliminar un cliente
+      parameters:
+        - name: clienteId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Cliente eliminado
+components:
+  schemas:
+    Cliente:
+      type: object
+      required:
+        - id
+        - sharedKey
+        - nombre
+        - apellido
+        - correo
+        - telefono
+      properties:
+        id:
+          type: string
+          format: uuid
+        sharedKey:
+          type: string
+        nombre:
+          type: string
+        apellido:
+          type: string
+        correo:
+          type: string
+          format: email
+        telefono:
+          type: string
