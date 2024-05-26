@@ -9,6 +9,7 @@ import com.quimbaya.clientes_api.cliente.domain.port.out.ClienteRepositoryPort;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+
 @Data
 @AllArgsConstructor
 @Service
@@ -22,6 +23,4 @@ public class CreateClienteUseCaseImpl implements CreateClienteUseCase{
 		return clienteRepositoryPort.save(cliente);
 	}
 	
-	
-
 }
