@@ -17,7 +17,7 @@
 		<java.version>21</java.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     	<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    	<mapstruct.version>1.6.0.Beta1</mapstruct.version>
+    	
 	</properties>
 	<dependencies>
 		<dependency>
@@ -111,9 +111,15 @@
 		
 		<!--  ============ MapStruct ===================================================   -->
 		<dependency>
+		    <groupId>org.projectlombok</groupId>
+		    <artifactId>lombok-mapstruct-binding</artifactId>
+		    <version>0.2.0</version>
+		</dependency>
+		
+		<dependency>
 		    <groupId>org.mapstruct</groupId>
-		    <artifactId>mapstruct</artifactId>
-		    <version>${mapstruct.version}</version>
+    		<artifactId>mapstruct</artifactId>
+		    <version>1.6.0.Beta2</version>
 		</dependency>
 
 
