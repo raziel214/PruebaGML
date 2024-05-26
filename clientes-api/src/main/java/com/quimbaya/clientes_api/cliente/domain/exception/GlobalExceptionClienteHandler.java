@@ -12,4 +12,10 @@ public class GlobalExceptionClienteHandler {
 	{
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
 	}
+	
+	@ExceptionHandler(ClienteSharedKeyNotFoundException.class)
+	public ResponseEntity<String> handleClienteShareKeyNotFoundException(ClienteSharedKeyNotFoundException e)
+	{
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+	}
 }

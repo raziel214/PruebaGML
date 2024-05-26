@@ -15,7 +15,7 @@ public class SwaggerConfig {
     @Bean
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
-            .info(new Info().title("Fast reading 4.0").version("1.0").description("Api Rest System Service Desk4.0"))
+            .info(new Info().title("Api Clientes").version("1.0").description("Api Rest PruebaGML"))
             .addSecurityItem(new SecurityRequirement().addList("JWT"))
             .components(
                 new Components()
