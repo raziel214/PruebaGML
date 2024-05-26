@@ -5,6 +5,8 @@ import org.mapstruct.Mapping;
 
 import com.quimbaya.clientes_api.cliente.domain.model.Cliente;
 import com.quimbaya.clientes_api.cliente.infraestructure.persistence.entity.ClienteEntity;
+import com.quimbaya.clientes_api.usuario.domain.model.Users;
+import com.quimbaya.clientes_api.usuario.infraestructure.persistence.entity.UserEntity;
 
 @Mapper
 public interface IMapper {
@@ -14,4 +16,10 @@ public interface IMapper {
 	
 	@Mapping(target = "id")
 	public abstract Cliente clienteConvertToDomain(ClienteEntity clienteEntity);
+	
+	@Mapping(target = "user_id")
+	public abstract UserEntity userConvertToEntity(Users user); 
+	
+	@Mapping(target = "user_id")
+	public abstract Users userConvertToDomain(UserEntity userEntity); 
 }

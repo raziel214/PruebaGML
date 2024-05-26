@@ -55,7 +55,7 @@ public class JpaClienteRepositoryAdapter implements ClienteRepositoryPort {
 		if(jpaClienteRepository.existsById(cliente.getId())) {
 			ClienteEntity entityToUpdate=mapper.clienteConvertToEntity(cliente);
 			ClienteEntity updatedEntity=jpaClienteRepository.save(entityToUpdate);
-			return Optional.of(mapper.clienteConvertToDomain(updatedEntity));
+			return Optional.ofNullable(mapper.clienteConvertToDomain(updatedEntity));
 		}
 		return Optional.empty();
 	}

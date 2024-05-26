@@ -27,7 +27,7 @@ public class ClienteService implements CreateClienteUseCase,DeleteClienteUseCase
 	private final UpdateClienteUseCase updateClienteUseCase;
 	
 	@Override
-	public Optional<Cliente> updateCliente(Long id, Cliente cliente) {
+	public Cliente updateCliente(Long id, Cliente cliente) {
 		// TODO Auto-generated method stub
 		return updateClienteUseCase.updateCliente(id, cliente);
 	}

@@ -6,5 +6,5 @@ import com.quimbaya.clientes_api.cliente.domain.model.Cliente;
 
 public interface UpdateClienteUseCase {
 
-	Optional<Cliente> updateCliente(Long id,Cliente cliente);
+	Cliente updateCliente(Long id,Cliente cliente);
 }
