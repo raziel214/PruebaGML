@@ -10,12 +10,11 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.auth0.jwt.interfaces.JWTVerifier;
-import com.quimbaya.clientes_api.usuario.domain.exception.InvalidCredentialsException;
-import com.quimbaya.clientes_api.usuario.domain.model.Users;
+import com.quimbaya.clientes_api.security.domain.exception.InvalidCredentialsException;
+import com.quimbaya.clientes_api.user.domain.model.Users;
 
 @Service
 public class JwtService {
-
 
     @Value("${jwt.secret}")
     private String secret;
@@ -56,3 +55,4 @@ public class JwtService {
     } 
     
 }
+

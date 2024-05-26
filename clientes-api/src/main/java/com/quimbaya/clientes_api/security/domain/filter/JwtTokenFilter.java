@@ -1,6 +1,5 @@
 package com.quimbaya.clientes_api.security.domain.filter;
 
-
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -9,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.quimbaya.clientes_api.security.aplication.service.JwtService;
-
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -18,9 +16,9 @@ import lombok.AllArgsConstructor;
 import java.io.IOException;
 import java.util.List;
 
+
 @AllArgsConstructor
 public class JwtTokenFilter extends OncePerRequestFilter {
-
 
     @Autowired
     private JwtService jwtService;
@@ -35,9 +33,9 @@ public class JwtTokenFilter extends OncePerRequestFilter {
                 DecodedJWT jwt = jwtService.verifyToken(token);
 
                 String username = jwt.getSubject();
-                // Autenticación del usuario sin asignar roles
+                // Aquí se pueden agregar más lógicas para extraer roles del token si es necesario
                 UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(
-                        username, null, null);
+                        username, null, List.of(new SimpleGrantedAuthority("ROLE_USER")));
                 SecurityContextHolder.getContext().setAuthentication(auth);
 
                 filterChain.doFilter(request, response); // Solo se llama si la autenticación es exitosa
@@ -50,4 +48,5 @@ public class JwtTokenFilter extends OncePerRequestFilter {
             filterChain.doFilter(request, response); // Si no hay token, se continúa con el filtro
         }
     }
+
 }

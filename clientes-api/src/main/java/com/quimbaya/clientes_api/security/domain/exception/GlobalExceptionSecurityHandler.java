@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 public class GlobalExceptionSecurityHandler {
 
-	@ExceptionHandler(InvalidCredentialsException.class)
+	 @ExceptionHandler(InvalidCredentialsException.class)
 	 public ResponseEntity<String> handleInvalidCredentialsException(InvalidCredentialsException e) {
 	        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
 	    }

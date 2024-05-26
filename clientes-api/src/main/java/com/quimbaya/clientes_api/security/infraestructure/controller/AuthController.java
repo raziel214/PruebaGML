@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.quimbaya.clientes_api.security.aplication.service.AuthenticationService;
 import com.quimbaya.clientes_api.security.aplication.service.JwtService;
-import com.quimbaya.clientes_api.usuario.domain.exception.UserNotFoundException;
-import com.quimbaya.clientes_api.usuario.domain.model.LoginUser;
-import com.quimbaya.clientes_api.usuario.domain.model.Users;
-import com.quimbaya.clientes_api.usuario.domain.port.out.UserRepositoryPort;
+import com.quimbaya.clientes_api.user.domain.exception.UserNotFoundException;
+import com.quimbaya.clientes_api.user.domain.model.LoginUser;
+import com.quimbaya.clientes_api.user.domain.model.Users;
+import com.quimbaya.clientes_api.user.domain.port.out.UserRepositoryPort;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -42,6 +42,7 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@RequestBody  LoginUser loginUser) {    	    
     	//String token = authenticationService.loadUserByUsername(loginUser.getUserEmail(), loginUser.getUserPass());
+    	
     	UsernamePasswordAuthenticationToken login = new UsernamePasswordAuthenticationToken(loginUser.getUserEmail(),loginUser.getUserPass() );
         Authentication authentication = this.authenticationManager.authenticate(login);
 
@@ -49,8 +50,11 @@ public class AuthController {
         System.out.println(authentication.getPrincipal());
         Users user = userRepositoryPort.findByEmail(loginUser.getUserEmail())
                 .orElseThrow(()->new UserNotFoundException((long) 1));
+
         String jwt = this.jwtService.generateToken(user);
-        System.out.println(jwt);       
+        System.out.println(jwt);
+
+        //return ResponseEntity.ok().header(HttpHeaders.AUTHORIZATION, jwt).build();
     	
          return new ResponseEntity<>(jwt, HttpStatus.OK);
     }
