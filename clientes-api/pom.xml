@@ -15,6 +15,8 @@
 	<description>API para la gestión de datos de clientes</description>
 	<properties>
 		<java.version>21</java.version>
+		<mapstruct.version>1.6.0.Beta2</mapstruct.version>
+		 <lombok.version>1.18.20</lombok.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     	<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     	
@@ -55,7 +57,7 @@
 		<dependency>
 		    <groupId>org.projectlombok</groupId>
 		    <artifactId>lombok</artifactId>
-		    <version>1.18.20</version>
+		    <version>${lombok.version}</version>
 		    <scope>provided</scope>
 		</dependency>
 		<!-- jwt -->
@@ -119,7 +121,7 @@
 		<dependency>
 		    <groupId>org.mapstruct</groupId>
     		<artifactId>mapstruct</artifactId>
-		    <version>1.6.0.Beta2</version>
+		    <version>${mapstruct.version}</version>
 		</dependency>
 
 
