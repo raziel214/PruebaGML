@@ -1,27 +1,37 @@
-# Proyecto de Administración de Clientes
+# Clientes API
 
-Este proyecto es una prueba técnica que implementa una aplicación de administración de clientes utilizando Angular para el frontend y Java con arquitectura hexagonal para el backend. Además, se utiliza MariaDB como base de datos y se sigue un enfoque API-first para el diseño de la API.
+Este proyecto incluye una API para la gestión de datos de clientes y un frontend para administrar esos datos.
 
+## Tecnologías Utilizadas
+
+### Backend
+- **Java 21**
+- **Spring Boot 3.2.0**
+- **Spring Security**
+- **JWT**
+- **Spring Data JPA**
+- **Hibernate**
+- **MySQL**
+- **MapStruct**
+- **Lombok**
 ## Estructura del Proyecto
 
-- `apidesign/`: Contiene la definición de la API en formato OpenAPI.
-- `database/`: Contiene scripts DDL y DML para la base de datos.
-- `java-backend/`: Proyecto backend en Java.
-- `angular-frontend/`: Proyecto frontend en Angular.
+El proyecto sigue la arquitectura hexagonal (puertos y adaptadores). Las principales capas son:
 
-## Configuración del Entorno
+### Dominio
+Contiene los modelos y las interfaces de los casos de uso.
 
-### Prerrequisitos
+### Aplicación
+Contiene las implementaciones de los casos de uso y los servicios de la aplicación.
 
-- [Node.js](https://nodejs.org/)
-- [Angular CLI](https://cli.angular.io/)
-- [Java JDK](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html)
-- [Maven](https://maven.apache.org/)
-- [MariaDB](https://mariadb.org/)
+### Infraestructura
+Contiene los adaptadores que implementan las interfaces del dominio, así como la configuración del framework.
 
-### Configuración del Backend
+### Frontend
+- **Angular**
+- **PrimeNG**
+- **Sakai Templete**
 
-1. Clonar el repositorio:
-   ```bash
-   git clone https://github.com/raziel214/PruebaGML.git
-   cd PruebaGML
+
+## Scripts de Base de Datos
+- **Mysql**
