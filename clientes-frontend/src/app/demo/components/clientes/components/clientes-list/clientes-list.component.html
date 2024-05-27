@@ -82,19 +82,22 @@
                     </div>
                     <div class="p-field">
                         <label for="correo">Email</label>
-                        <input id="correo" type="email" pInputText [(ngModel)]="currentCliente.correo" name="correo" #correo="ngModel" required/>
+                        <input id="correo" type="email" pInputText [(ngModel)]="currentCliente.correo" name="correo" #correo="ngModel" required email/>
                         <div *ngIf="correo.invalid && (correo.dirty || correo.touched)">
                             <small class="p-error" *ngIf="correo.errors?.required">El campo Email es requerido.</small>
                             <small class="p-error" *ngIf="correo.errors?.email">El Email debe ser válido.</small>
                         </div>
                     </div>
+
                     <div class="p-field">
                         <label for="telefono">Telefono</label>
-                        <input id="telefono" type="text" pInputText [(ngModel)]="currentCliente.telefono" name="telefono" #telefono="ngModel" required/>
+                        <input id="telefono" type="text" pInputText [(ngModel)]="currentCliente.telefono" name="telefono" #telefono="ngModel" required pattern="^[0-9]*$"/>
                         <div *ngIf="telefono.invalid && (telefono.dirty || telefono.touched)">
                             <small class="p-error" *ngIf="telefono.errors?.required">El campo Telefono es requerido.</small>
+                            <small class="p-error" *ngIf="telefono.errors?.pattern">El campo Telefono solo puede contener números.</small>
                         </div>
                     </div>
+
                 </div>
                 <p-footer>
                     <button pButton label="Cancel" icon="pi pi-times" (click)="clienteDialog=false"></button>
