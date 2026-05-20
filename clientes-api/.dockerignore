@@ -1,0 +1,15 @@
+target/
+**/target/
+.git/
+.gitignore
+.idea/
+.vscode/
+.settings/
+.project
+.classpath
+*.iml
+*.log
+**/node_modules/
+README.md
+Dockerfile
+.dockerignore

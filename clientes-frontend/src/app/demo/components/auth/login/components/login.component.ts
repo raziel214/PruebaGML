@@ -1,12 +1,9 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { LayoutService } from 'src/app/layout/service/app.layout.service';
-import { Router } from "@angular/router";
-import { TokenService } from '../../../../../demo/service/token.service';
-import { UserService } from '../../../../../demo/service/user.service';
+import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UserLoginResponse } from "../../../../api/login-response.interface";
-import { AuthService } from '../../../../service/auth.service'; // Import RolesService
 
+import { LayoutService } from 'src/app/layout/service/app.layout.service';
+import { AuthService } from '../../../../service/auth.service';
 
 @Component({
     selector: 'app-login',
@@ -15,51 +12,47 @@ import { AuthService } from '../../../../service/auth.service'; // Import RolesS
     encapsulation: ViewEncapsulation.None
 })
 export class LoginComponent implements OnInit {
+
     valCheck: string[] = ['remember'];
-    password!: string;
-    loginForm: FormGroup;
+    loginForm!: FormGroup;
+    loading = false;
+    errorMessage: string | null = null;
 
     constructor(
-        private authService: AuthService,
         public layoutService: LayoutService,
         private fb: FormBuilder,
-        private tokenService: TokenService,
-        private userService: UserService,
+        private authService: AuthService,
         private router: Router
     ) {}
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.loginForm = this.fb.group({
             useremail: ['', [Validators.required, Validators.email]],
             password: ['', Validators.required]
         });
     }
 
-    onSubmit() {
-        if (this.loginForm.valid) {
-            const userCredentials = {
-                userEmail: this.loginForm.get('useremail').value,
-                userPass: this.loginForm.get('password').value
-            };
-
-            this.tokenService.generateToken(userCredentials).subscribe(
-                token => {
-                    this.userService.validateUser(token, userCredentials).subscribe(
-                        (userResponse: UserLoginResponse) => {
-
-                                        this.authService.setLoggedIn(true);
-                                        this.userService.setToken(token);
-                                        this.router.navigate(['/clientes']);
-                        },
-                        userError => {
-                            console.error('Error validating user:', userError);
-                        }
-                    );
-                },
-                tokenError => {
-                    console.error('Error generating token:', tokenError);
-                }
-            );
+    onSubmit(): void {
+        if (this.loginForm.invalid || this.loading) {
+            return;
         }
+        this.loading = true;
+        this.errorMessage = null;
+
+        const credentials = {
+            userEmail: this.loginForm.value.useremail,
+            password: this.loginForm.value.password
+        };
+
+        this.authService.login(credentials).subscribe({
+            next: () => {
+                this.loading = false;
+                this.router.navigate(['/clientes']);
+            },
+            error: (err) => {
+                this.loading = false;
+                this.errorMessage = err?.error?.message ?? 'Credenciales inválidas';
+            }
+        });
     }
 }
